@@ -2,6 +2,7 @@ package gift.member.service;
 
 import gift.auth.dto.AuthRequest;
 import gift.auth.dto.AuthToken;
+import gift.auth.dto.KakaoUserInfoResponse;
 import gift.member.entity.Member;
 
 import java.util.Optional;
@@ -12,4 +13,6 @@ public interface MemberService {
     AuthToken login(AuthRequest request);
 
     Optional<Member> findByEmail(String email);
+
+    Optional<Member> findKakaoMember(Long kakaoId);
 }

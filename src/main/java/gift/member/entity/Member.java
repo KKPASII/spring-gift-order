@@ -18,6 +18,9 @@ public class Member {
     @Column(name = "role", nullable = false, length = 10)
     private Role role;
 
+    @Column(unique = true)
+    private Long kakaoId;
+
     protected Member() {
 
     }
@@ -49,5 +52,9 @@ public class Member {
 
     public Role getRole() {
         return this.role;
+    }
+
+    public Long getKakaoId() {
+        return this.kakaoId;
     }
 }
