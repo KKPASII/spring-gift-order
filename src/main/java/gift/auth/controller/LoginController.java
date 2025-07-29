@@ -5,6 +5,7 @@ import gift.auth.dto.AuthToken;
 import gift.auth.dto.KakaoTokenResponse;
 import gift.auth.dto.KakaoUserInfoResponse;
 import gift.global.util.JwtUtil;
+import gift.global.util.TokenCookieUtils;
 import gift.member.entity.Member;
 import gift.member.entity.Role;
 import gift.member.service.MemberService;
@@ -79,7 +80,7 @@ public class LoginController {
             return "redirect:/login";
         }
 
-        addTokenCookie(response, kakaoTokenResponse.accessToken());
+        response.addCookie(TokenCookieUtils.createAccessTokenCookie(kakaoTokenResponse.accessToken()));
 
         KakaoUserInfoResponse userInfo = restClient.get()
             .uri(kakaoUserInfoUri)
@@ -92,7 +93,7 @@ public class LoginController {
             return "redirect:/login";
         }
 
-        addTokenCookie(response, kakaoTokenResponse.accessToken());
+        response.addCookie(TokenCookieUtils.createAccessTokenCookie(kakaoTokenResponse.accessToken()));
 
         return "redirect:login";
     }
@@ -112,8 +113,7 @@ public class LoginController {
 
         Claims claims = jwtUtil.getClaims(accessToken);
         Role role = Role.valueOf(claims.get("role", String.class));
-
-        addTokenCookie(response, accessToken);
+        response.addCookie(TokenCookieUtils.createAccessTokenCookie(accessToken));
 
         String redirectUrl = "/";
         if (role == Role.ADMIN) {
@@ -122,13 +122,5 @@ public class LoginController {
             redirectUrl = "/wishes";
         }
         return ResponseEntity.ok(Map.of("redirectUrl", redirectUrl));
-    }
-
-    private void addTokenCookie(HttpServletResponse response, String accessToken) {
-        Cookie cookie = new Cookie("accessToken", URLEncoder.encode(BEARER_PREFIX + accessToken, StandardCharsets.UTF_8));
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(60 * 30);
-        response.addCookie(cookie);
     }
 }
