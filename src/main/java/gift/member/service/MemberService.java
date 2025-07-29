@@ -14,5 +14,5 @@ public interface MemberService {
 
     Optional<Member> findByEmail(String email);
 
-    Member findOrCreateMemberByKakaoId(Long kakaoId);
+    Member findOrCreateMemberByKakaoId(Long kakaoId, String accessToken);
 }

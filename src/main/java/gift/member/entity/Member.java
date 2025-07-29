@@ -21,6 +21,9 @@ public class Member {
     @Column(unique = true)
     private Long kakaoId;
 
+    @Column(length = 1024)
+    private String kakaoAccessToken;
+
     protected Member() {
 
     }
@@ -63,5 +66,13 @@ public class Member {
 
     public Long getKakaoId() {
         return this.kakaoId;
+    }
+
+    public String getKakaoAccessToken() {
+        return this.kakaoAccessToken;
+    }
+
+    public void updateKakaoAccessToken(String kakaoAccessToken) {
+        this.kakaoAccessToken = kakaoAccessToken;
     }
 }

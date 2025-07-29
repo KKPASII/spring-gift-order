@@ -52,6 +52,6 @@ public class KakaoOauthService {
         KakaoUserInfoResponse userInfo = kakaoApiClient.getUserInfo(tokenResponse.accessToken());
         Long kakaoUserId = userInfo.id();
 
-        return memberService.findOrCreateMemberByKakaoId(kakaoUserId);
+        return memberService.findOrCreateMemberByKakaoId(kakaoUserId, tokenResponse.accessToken());
     }
 }
