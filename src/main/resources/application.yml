@@ -21,15 +21,6 @@ spring:
       mode: always
   profiles:
     active: local, kakao
-  security:
-    oauth2:
-      client:
-        registration:
-          kakao:
-            redirect-uri: http://localhost:8080
-        provider:
-          kakao:
-            token-uri: https://kauth.kakao.com/oauth/token
 
 logging:
   level:

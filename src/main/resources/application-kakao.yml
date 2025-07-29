@@ -4,4 +4,8 @@ spring:
       client:
         registration:
           kakao:
-            client-id:81072bf89f8f7ca4b341b34289cd7a00
+            client-id: 81072bf89f8f7ca4b341b34289cd7a00
+            redirect-uri: http://localhost:8080
+        provider:
+          kakao:
+            token-uri: https://kauth.kakao.com/oauth/token
