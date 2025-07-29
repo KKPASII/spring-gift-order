@@ -76,7 +76,6 @@ public class LoginController {
             .body(KakaoTokenResponse.class);
 
         if (kakaoTokenResponse == null) {
-            System.out.println("카카오 액세스 토큰 발급 실패");
             return "redirect:/login";
         }
 
@@ -89,7 +88,6 @@ public class LoginController {
             .body(KakaoUserInfoResponse.class);
 
         if (userInfo == null) {
-            System.out.println("회원 정보 요청 실패");
             return "redirect:/login";
         }
 
