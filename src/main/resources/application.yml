@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: spring-gift
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+    defer-datasource-initialization: true
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+  sql:
+    init:
+      mode: always
+  profiles:
+    active: local, kakao
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            redirect-uri: http://localhost:8080
+        provider:
+          kakao:
+            token-uri: https://kauth.kakao.com/oauth/token
+
+logging:
+  level:
+    org:
+      hibernate:
+        orm:
+          jdbc:
+            bind: TRACE
