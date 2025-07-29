@@ -8,10 +8,10 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email", nullable = false, unique = true, length = 255)
+    @Column(name = "email", nullable = true, unique = true, length = 255)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 255)
+    @Column(name = "password", nullable = true, length = 255)
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -36,6 +36,13 @@ public class Member {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public Member(Long kakaoId) {
+        this.email = null;
+        this.password = null;
+        this.role = Role.USER;
+        this.kakaoId = kakaoId;
     }
 
     public Long getId() {

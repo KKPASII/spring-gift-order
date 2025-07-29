@@ -13,4 +13,6 @@ public interface MemberService {
     AuthToken login(AuthRequest request);
 
     Optional<Member> findByEmail(String email);
+
+    Member findOrCreateMemberByKakaoId(Long kakaoId);
 }

@@ -53,4 +53,14 @@ public class MemberServiceImpl implements MemberService {
     public Optional<Member> findByEmail(String email) {
         return memberRepository.findByEmail(email);
     }
+
+    @Override
+    @Transactional
+    public Member findOrCreateMemberByKakaoId(Long kakaoId) {
+        return memberRepository.findByKakaoId(kakaoId)
+            .orElseGet(() -> {
+                Member newMember = new Member(kakaoId);
+                return memberRepository.save(newMember);
+            });
+    }
 }
