@@ -2,7 +2,6 @@ package gift.member.service;
 
 import gift.auth.dto.AuthRequest;
 import gift.auth.dto.AuthToken;
-import gift.auth.dto.KakaoUserInfoResponse;
 import gift.global.exception.DuplicatedEmailException;
 import gift.global.exception.LoginFailedException;
 import gift.global.util.JwtUtil;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -55,9 +53,17 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Optional<Member> findKakaoMember(Long kakaoId) {
-        return memberRepository.findByKakaoId(kakaoId);
+    @Transactional
+    public Member findOrCreateMemberByKakaoId(Long kakaoId, String accessToken) {
+        return memberRepository.findByKakaoId(kakaoId)
+            .map(member -> {
+                member.updateKakaoAccessToken(accessToken);
+                return member;
+            })
+            .orElseGet(() -> {
+                Member newMember = new Member(kakaoId);
+                newMember.updateKakaoAccessToken(accessToken);
+                return memberRepository.save(newMember);
+            });
     }
-
-
 }

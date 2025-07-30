@@ -31,6 +31,13 @@ public class Wish {
         this.quantity = quantity;
     }
 
+    public Wish(Long id, Member member, Product product, int quantity) {
+        this.id = id;
+        this.member = member;
+        this.product = product;
+        this.quantity = quantity;
+    }
+
     public Long getId() {
         return this.id;
     }
