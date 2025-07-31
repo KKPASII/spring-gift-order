@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
         Order newOrder = OrderMapper.toOrder(orderRequest);
         Order savedOrder = orderRepository.save(newOrder);
 
-        wishRepository.findByMemberIdAndProductId(member.getId(), option.getProduct().getId())
+        wishRepository.findByMemberIdAndOptionId(member.getId(), option.getProduct().getId())
             .ifPresent(wish -> wishRepository.deleteById(wish.getId()));
 
         sendKakaoTalkOrderConfirmation(member, savedOrder);
