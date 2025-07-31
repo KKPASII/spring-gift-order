@@ -75,7 +75,7 @@
     <main class="wish-list">
         <th:block th:if="${wishes.hasContent()}">
             <div class="wish-card" th:id="|wish-card-${wish.id}|" th:each="wish : ${wishes.content}">
-                <a th:href="@{/wishes/{id}(id=${wish.id})}" class="wish-info-link">
+                <div class="wish-info-link">
                     <img th:src="${wish.product.imageUrl}" alt="Product Image" class="product-image">
                     <div>
                         <h2 class="product-name" th:text="${wish.product.name}"></h2>
@@ -83,8 +83,7 @@
                         <p class="product-price" th:text="|${#numbers.formatInteger(wish.product.price, 3, 'COMMA')}원|"></p>
                         <p class="wish-quantity" th:text="|수량: ${wish.quantity}개|"></p>
                     </div>
-                </a>
-
+                </div>
                 <div class="wish-actions">
                     <button type="button" class="btn btn-order order-btn"
                             th:data-option-id="${wish.optionId}"
