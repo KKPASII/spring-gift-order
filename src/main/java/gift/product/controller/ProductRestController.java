@@ -19,12 +19,10 @@ import java.util.List;
 public class ProductRestController {
     private final ProductService productService;
     private final OptionService optionService;
-    private final ProductRepository productRepository;
 
-    public ProductRestController(ProductService productService, OptionService optionService, ProductRepository productRepository) {
+    public ProductRestController(ProductService productService, OptionService optionService) {
         this.productService = productService;
         this.optionService = optionService;
-        this.productRepository = productRepository;
     }
 
     @PostMapping
