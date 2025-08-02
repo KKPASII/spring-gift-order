@@ -6,6 +6,12 @@ import gift.product.entity.Product;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "wish", uniqueConstraints = {
+        @UniqueConstraint(
+                name = "wish_member_option_uk",
+                columnNames = {"member_id", "option_id"}
+        )
+})
 public class Wish {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
