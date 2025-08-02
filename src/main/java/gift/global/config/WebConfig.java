@@ -10,6 +10,7 @@ import java.util.List;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+    private static final long MAX_AGE_SECONDS = 1800L;
 
     private final LoginMemberArgumentResolver loginMemberArgumentResolver;
 
@@ -36,6 +37,6 @@ public class WebConfig implements WebMvcConfigurer {
                 HttpMethod.OPTIONS.name())
             .allowedHeaders("*")
             .allowCredentials(true)
-            .maxAge(1800);
+            .maxAge(MAX_AGE_SECONDS);
     }
 }
